@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="container-fluid">
-            <div class="row">
+            <div class="row ship-world">
                 <div class="col-sm-12 world-view">
+                    <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
                     main-view
                 </div>
             </div>
@@ -25,11 +26,12 @@
     </div>
 </template>
 
-<style scoped>
-
-
+<style lang="sass" scoped>
+.ship-world {
+    height: 320px;
+    overflow: hidden;
+};
 </style>
-
 
 <script>
 import TodoEdit from './TodoEdit.vue';
@@ -44,15 +46,37 @@ export default {
     },
     methods: {
         add: function() {
-            this.counter++;
+            this.heroes[0].x+=10;
+            console.log(this.heroes);
         },
         sub: function() {
-            this.counter--;
+            this.heroes[0].x-=10;
+            console.log(this.heroes);
         },
     },
     data: function() {
         return {
             counter: 1,
+            heroes: [
+                {
+                    id: 1,
+                    name: 'あああ',
+                    x: 100,
+                    y: 100,
+                },
+                {
+                    id: 2,
+                    name: 'いいいいい',
+                    x: 130,
+                    y: 200,
+                },
+                {
+                    id: 3,
+                    name: 'ABCD',
+                    x: 370,
+                    y: 120,
+                },
+            ],
         };
     },
     mounted: function() {
