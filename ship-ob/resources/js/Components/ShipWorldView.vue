@@ -3,7 +3,9 @@
         <div class="container-fluid">
             <div class="row ship-world">
                 <div class="col-sm-12 world-view">
+                <transition-group name="thero" v-on:enter="enter">
                     <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
+                </transition-group>
                     main-view
                 </div>
             </div>
@@ -12,12 +14,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>操作はここ</h1>
+                    <h1>操作はここ？</h1>
                     <button class="btn btn-primary" @click="add()">▲</button>
-                    <h2>{{ counter }}</h2>
+                    <h2>{{ 'xxx' }}</h2>
                     <button class="btn btn-primary" @click="sub()">▼</button>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" style="background-color: gray;">
                     <h1>テスト</h1>
                 </div>
             </div>
@@ -28,9 +30,13 @@
 
 <style lang="sass" scoped>
 .ship-world {
-    height: 320px;
+    height: 520px;
     overflow: hidden;
 };
+.thero-move {
+    transition: transform 1s;
+}
+
 </style>
 
 <script>
@@ -40,23 +46,23 @@ import HeroView from './HeroView.vue';
 export default {
     props: {
         'worldInfo': {
-            type: Object,
+            type: Array,
             default: {},
         },
     },
     methods: {
         add: function() {
-            this.heroes[0].x+=10;
-            console.log(this.heroes);
+            this.heroes[0].x+=50;
         },
         sub: function() {
-            this.heroes[0].x-=10;
-            console.log(this.heroes);
+            this.heroes[0].x-=50;
+        },
+        enter: function() {
+            console.log('enter!')
         },
     },
     data: function() {
         return {
-            counter: 1,
             heroes: [
                 {
                     id: 1,
@@ -67,8 +73,8 @@ export default {
                 {
                     id: 2,
                     name: 'いいいいい',
-                    x: 130,
-                    y: 200,
+                    x: 160,
+                    y: 210,
                 },
                 {
                     id: 3,
