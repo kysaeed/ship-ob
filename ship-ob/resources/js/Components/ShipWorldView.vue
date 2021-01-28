@@ -80,19 +80,19 @@ export default {
             heroes: [
                 {
                     id: 1,
-                    name: 'あああ',
+                    name: 'A様',
                     x: 100,
                     y: 100,
                 },
                 {
                     id: 2,
-                    name: 'いいいいい',
+                    name: 'xxさん',
                     x: 160,
                     y: 210,
                 },
                 {
                     id: 3,
-                    name: 'ABCD',
+                    name: 'Cさん',
                     x: 370,
                     y: 120,
                 },
