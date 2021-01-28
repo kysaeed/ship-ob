@@ -10,7 +10,10 @@
             todos....
         </div>
         <div class="avatar-container">
-            <img class="img-fluid" src="img/avatar.png" />
+            <div class="avatar-top">    
+                <img class="img-fluid" src="img/avatar.png" />
+            </div>
+            <div class="avatar-floor"></div>
         </div>
         <h4>{{ heroInfo.name }}</h4>
     </div>
@@ -20,12 +23,34 @@
 .hero-view-container {
     width: 110px;
     position: absolute;
+    border: none;
+    background-color: none;
+};
+.avatar-container {
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(30deg);
+    position: relative;
+    margin: 0px;
+}
+
+.avatar-top {
+    transform-style: preserve-3d;
+    transform-origin: bottom;
+    position: relative;
+    transform: rotateX(10deg); 
+    padding: 4px 9px 1px 9px;
+    border: 1px solid #808080;
+    background-color: #d0d0d070;
+}
+.avatar-floor {
+    transform-style: preserve-3d;
+    transform: rotateX(80deg);
+    transform-origin: 0px 0px;
+    position: relative;
+    width: 100%;
+    height: 50px;    
     border: 1px solid #808080;
     background-color: #f0f0f070;
-};  
-.avatar-container {
-    position: relative;
-    margin: 30px;
 }
 </style>
 
@@ -67,6 +92,19 @@ export default {
                 duration: 1,
                 ease: 'power1.out',
                 x: this.heroInfo.x,
+                onUpdate: function() {
+                    // console.log('on-update');
+                }
+            });            
+        },
+        'heroInfo.y': function() {
+            gsap.to(this.position, {
+                duration: 1,
+                ease: 'power1.out',
+                y: this.heroInfo.y,
+                onUpdate: function() {
+                    // console.log('on-update');
+                }
             });            
         },
 
@@ -74,9 +112,16 @@ export default {
 
     computed: {
         posscss: function() {
+            
+            var w = 70;// - (120 * (this.position.y / 600));
+            var h = 90;// - (240 * (this.position.y / 600));
             return {
                 left: this.position.x + 'px',
-                top: this.position.y + 'px',
+                bottom: this.position.y + 'px',
+                width: w + 'px',
+                height: h + 'px',
+                zIndex: 1000000000 - this.position.y,
+// transform: 'perspective(500px) translateZ(-9.7rem)',
             };
         },
     },

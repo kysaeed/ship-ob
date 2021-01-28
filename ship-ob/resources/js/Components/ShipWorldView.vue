@@ -14,10 +14,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>操作はここ？</h1>
-                    <button class="btn btn-primary" @click="add()">▲</button>
-                    <h2>{{ 'xxx' }}</h2>
-                    <button class="btn btn-primary" @click="sub()">▼</button>
+                    <div style="width:300px;">
+                        <div class="text-center">
+                            <button class="btn btn-primary" @click="up()">▲</button>
+                        </div>
+                    </div>
+                    <div style="width:300px;">
+                        <div class="text-center">
+                            <button class="btn btn-primary" @click="left()">◀</button>
+                            <button class="btn btn-primary" @click="down()">▼</button>
+                            <button class="btn btn-primary" @click="right()">▶</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-6" style="background-color: gray;">
                     <h1>テスト</h1>
@@ -51,11 +59,17 @@ export default {
         },
     },
     methods: {
-        add: function() {
+        right: function() {
             this.heroes[0].x+=50;
         },
-        sub: function() {
+        left: function() {
             this.heroes[0].x-=50;
+        },
+        down: function() {
+            this.heroes[0].y+=-50;
+        },
+        up: function() {
+            this.heroes[0].y-=-50;
         },
         enter: function() {
             console.log('enter!')
