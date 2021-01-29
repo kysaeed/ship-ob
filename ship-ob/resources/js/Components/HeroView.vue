@@ -15,7 +15,7 @@
         </div>
         <div class="avatar-container">
             <div class="avatar-top">    
-                <img class="img-fluid" src="img/avatar.png" />
+                <img class="img-fluid" :src="avatar" />
             </div>
             <div class="avatar-floor"></div>
             <div class="avatar-shadow"></div>
@@ -177,6 +177,9 @@ export default {
 // transform: 'perspective(500px) translateZ(-9.7rem)',
             };
         },
+        avatar: function() {
+            return 'img/' + this.heroInfo.avatar;
+        }
     },
 
 }

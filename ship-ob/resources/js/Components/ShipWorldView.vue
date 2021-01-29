@@ -83,18 +83,21 @@ export default {
                     name: 'A様',
                     x: 100,
                     y: 100,
+                    avatar: 'avatar1.png',
                 },
                 {
                     id: 2,
                     name: 'xxさん',
                     x: 160,
                     y: 210,
+                    avatar: 'avatar2.png',
                 },
                 {
                     id: 3,
                     name: 'Cさん',
                     x: 370,
                     y: 120,
+                    avatar: 'avatar2.png',
                 },
             ],
         };
