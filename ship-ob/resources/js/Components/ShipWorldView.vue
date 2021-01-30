@@ -2,10 +2,12 @@
     <div>
         <div class="container-fluid">
             <div class="row ship-world">
-                <div class="col-sm-12 world-view">
-                <transition-group name="thero" v-on:enter="enter">
-                    <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
-                </transition-group>
+                <div class="col-sm-12 world-view-container">
+                    <div class="world-view" :style="viewStyle">
+                        <transition-group name="thero" v-on:enter="enter">
+                            <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
+                        </transition-group>
+                    </div>
                     main-view
                 </div>
             </div>
@@ -38,14 +40,35 @@
 
 <style lang="sass" scoped>
 .ship-world {
-    height: 520px;
-    overflow: hidden;
+    height: 720px;
+    position: relative;
 };
+
+.world-view-container {
+    position: relative;
+    height: 720px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 3200px;
+    perspective-origin: 50% -500px;
+
+}
+
+.world-view {
+    position: relative;
+    height: 720px;
+    width: 1000px;
+    // overflow: hidden;
+    transform-style: preserve-3d;
+    // transform: translate3d(100px, 0, -200px);
+
+}
 .thero-move {
     transition: transform 1s;
 }
 
 </style>
+
 
 <script>
 import TodoEdit from './TodoEdit.vue';
@@ -82,21 +105,21 @@ export default {
                     id: 1,
                     name: 'A様',
                     x: 100,
-                    y: 100,
+                    y: 300,
                     avatar: 'avatar1.png',
                 },
                 {
                     id: 2,
                     name: 'xxさん',
-                    x: 160,
-                    y: 210,
+                    x: 260,
+                    y: 410,
                     avatar: 'avatar2.png',
                 },
                 {
                     id: 3,
                     name: 'Cさん',
-                    x: 370,
-                    y: 120,
+                    x: 390,
+                    y: 320,
                     avatar: 'avatar2.png',
                 },
             ],
@@ -112,6 +135,13 @@ export default {
     components: {
         'todo-edit': TodoEdit,
         'hero-view': HeroView,
+    },
+    computed: {
+        viewStyle: function() {
+            return {
+                transform: 'translate3d(' +(-this.heroes[0].x + 400)+ 'px, 0, ' +(this.heroes[0].y - 800)+ 'px)',
+            };
+        }
     },
 }
 </script>

@@ -37,6 +37,21 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+let assset = document.head.querySelector('meta[name="asset-base-url"]');
+if (assset) {
+    const assetBaseUrl = assset.content;
+    global.asset = function(name) {
+        return assetBaseUrl + name;
+    } 
+} else {
+    global.asset = function(name) {
+        return '/' + name;
+    } 
+}
+
+console.log(window.assetBaseUrl );
+
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

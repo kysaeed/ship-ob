@@ -1,5 +1,5 @@
 <template>
-    <div class="hero-view-container" :style="posscss">
+    <div class="hero-view-container" :style="styleHero">
         <div class="ballon-container">
             <div class="balloon-shape">
                 <div class="">
@@ -27,14 +27,16 @@
 <style lang="sass" scoped>
 
 .hero-view-container {
-    width: 110px;
+    width: 90px;
+    height: 110px;
     position: absolute;
     border: none;
     background-color: none;
+    transform-style: preserve-3d;
 };
 .avatar-container {
     transform-style: preserve-3d;
-    transform: rotateX(-30deg) rotateY(30deg);
+    transform: rotateY(30deg);
     position: relative;
     margin: 0px;
 }
@@ -50,23 +52,23 @@
 }
 .avatar-floor {
     transform-style: preserve-3d;
-    transform: rotateX(80deg);
+    transform: rotateX(90deg);
     transform-origin: top;
     position: relative;
     width: 100%;
-    height: 50px;    
+    height: 70px;    
     border: 1px solid #808080;
     background-color: #f0f0f070;
 }
 .avatar-shadow {
     transform-style: preserve-3d;
-    transform: translateY(9px) rotateX(80deg) ;
+    transform: translateY(9px) rotateX(90deg) ;
     transform-origin: 0px 0px;
     position: absolute;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 50px;    
+    height: 70px;    
     border: none;
     background: linear-gradient(to top right, #24242430, #24242408);
 }
@@ -164,21 +166,24 @@ export default {
     },
 
     computed: {
-        posscss: function() {
+        styleHero: function() {
             
-            var w = 70;// - (120 * (this.position.y / 600));
-            var h = 90;// - (240 * (this.position.y / 600));
+            // var w = 70;// - (120 * (this.position.y / 600));
+            // var h = 90;// - (240 * (this.position.y / 600));
             return {
                 left: this.position.x + 'px',
-                bottom: this.position.y + 'px',
-                width: w + 'px',
-                height: h + 'px',
-                zIndex: 1000000000 - this.position.y,
+                bottom: (this.position.y * 0.0) + 'px',
+                // width: w + 'px',
+                // height: h + 'px',    
+                // zIndex: 1000000000 - this.position.y,
+                // transform: '',
+                transform: 'translateZ(-' + (this.position.y / 1) + 'px)',
+
 // transform: 'perspective(500px) translateZ(-9.7rem)',
             };
         },
         avatar: function() {
-            return 'img/' + this.heroInfo.avatar;
+            return global.asset('img/' + this.heroInfo.avatar);
         }
     },
 
