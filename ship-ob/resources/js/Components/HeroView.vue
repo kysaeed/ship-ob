@@ -1,6 +1,6 @@
 <template>
     <div class="hero-view-container" :style="styleHero">
-        <div class="ballon-container">
+        <div class="balloon-container">
             <div class="balloon-shape">
                 <div class="">
                     todos....
@@ -77,36 +77,55 @@
 .balloon-container {
     position: relative;
     transform-style: preserve-3d;
-    transform: transrateX(20px);
+    // transform: transrateXY(20px) transrateX(20px);
+    margin: 0px 0px 13px 0px;
 }
 
 .balloon-shape {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0;
-  padding: 7px 10px;
-  min-width: 120px;
-  max-width: 100%;
-  color: #555;
-  font-size: 16px;
-  background: #99c4ffaf;
-  border-radius: 15px;
+    position:relative;
+    display: inline-block;
+    min-width: 120px;
+    max-with: 100%;
+    // height:80px;
+    background:#FFFFFF80;
+    padding: 3px;
+    text-align:center;
+    border: 1px solid #010101f0;
+    color:black;
+    // font-size:30px;
+    border-radius:10px;
+}
+.balloon-shape:after,.balloon-shape:before {
+    position:relative;
+    border: solid transparent;
+    content:'';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    left: 28%;
+}
+.balloon-shape:after{
+    border-color: rgba(255, 255, 255, 0);
+    border-top-width: 19px;
+    border-bottom-width: 19px;
+    border-left-width: 12px;
+    border-right-width: 12px;
+    margin-left: -12px;
+    border-top-color: #FFFFFF;
+}
+.balloon-shape:before{
+    border-color: rgba(138, 138, 138, 0);
+    border-top-width: 21px;
+    border-bottom-width: 21px;
+    border-left-width: 14px;
+    border-right-width: 14px;
+    margin-left: -14px;
+    margin-top: 1px;
+    border-top-color: #8A8A8A;
 }
 
-.balloon-shape:before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 30%;
-  margin-left: -15px;
-  border: 15px solid transparent;
-  border-top: 15px solid #99c4ffaf;
-}
-
-.balloon-shape p {
-  margin: 0;
-  padding: 0;
-}
 </style>
 
 <script>
