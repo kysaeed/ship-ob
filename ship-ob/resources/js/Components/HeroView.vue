@@ -2,15 +2,7 @@
     <div class="hero-view-container" :style="styleHero">
         <div class="balloon-container">
             <div class="balloon-shape">
-                <div class="">
-                    todos....
-                </div>
-                <div class="">
-                    todos....
-                </div>
-                <div class="">
-                    todos....
-                </div>
+                <todo-list></todo-list>
             </div>
         </div>
         <div class="avatar-container">
@@ -82,14 +74,14 @@
 }
 
 .balloon-shape {
-    position:relative;
+    position: relative;
     display: inline-block;
-    min-width: 120px;
-    max-with: 100%;
+    min-width: 320px;
+    max-with: 380px;
     // height:80px;
     background:#FFFFFF80;
     padding: 3px;
-    text-align:center;
+    // text-align: left;
     border: 1px solid #010101f0;
     color:black;
     // font-size:30px;
@@ -131,7 +123,7 @@
 <script>
 import gsap from 'gsap';
 
-console.log(gsap);  
+import TodoList from './TodoList.vue';
 
 export default {
     props: {
@@ -205,6 +197,9 @@ export default {
             return global.asset('img/' + this.heroInfo.avatar);
         }
     },
+    components: {
+        'todo-list': TodoList,
+    }
 
 }
 </script>

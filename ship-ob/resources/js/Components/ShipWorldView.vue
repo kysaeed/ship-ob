@@ -30,7 +30,10 @@
                     </div>
                 </div>
                 <div class="col-sm-6" style="background-color: gray;">
-                    <h1>テスト</h1>
+                    <p>data 1 ...........</p>
+                    <p>data 2 ...........</p>
+                    <p>data 3 ...........</p>
+                    <p>data 4 ...........</p>
                 </div>
             </div>
         </div>
@@ -119,7 +122,7 @@ export default {
                     id: 3,
                     name: 'Cさん',
                     x: 390,
-                    y: 320,
+                    y: 1920,
                     avatar: 'avatar2.png',
                 },
             ],
