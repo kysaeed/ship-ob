@@ -16,6 +16,7 @@
     background-color: #38adffaa;
     border: 1px solid #38adffea;
     border-radius: 3px;
+    font-size: 9px;
 }
 </style>
 

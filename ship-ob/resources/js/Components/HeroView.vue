@@ -19,8 +19,8 @@
 <style lang="sass" scoped>
 
 .hero-view-container {
-    width: 90px;
-    height: 110px;
+    width: 50px;
+    height: 70px;
     position: absolute;
     border: none;
     background-color: none;
@@ -38,8 +38,8 @@
     transform-origin: bottom;
     position: relative;
     transform: rotateX(10deg); 
-    padding: 4px 9px 1px 9px;
-    border: 1px solid #808080;
+    padding: 2px 5px 1px 5px;
+    border: 1px solid #4e4e4ee8;
     background-color: #d0d0d070;
 }
 .avatar-floor {
@@ -48,19 +48,19 @@
     transform-origin: top;
     position: relative;
     width: 100%;
-    height: 70px;    
-    border: 1px solid #808080;
+    height: 49px;    
+    border: 1px solid #4e4e4ee8;
     background-color: #f0f0f070;
 }
 .avatar-shadow {
     transform-style: preserve-3d;
-    transform: translateY(9px) rotateX(90deg) ;
+    transform: translateY(6px) rotateX(90deg) ;
     transform-origin: 0px 0px;
     position: absolute;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 70px;    
+    height: 49px;    
     border: none;
     background: linear-gradient(to top right, #24242430, #24242408);
 }
@@ -76,8 +76,8 @@
 .balloon-shape {
     position: relative;
     display: inline-block;
-    min-width: 320px;
-    max-with: 380px;
+    min-width: 200px;
+    max-with: 200px;
     // height:80px;
     background:#FFFFFF80;
     padding: 3px;
@@ -154,23 +154,25 @@ export default {
             console.log('wached!!', this.heroInfo);
         },
         'heroInfo.x': function() {
+            // this.position.x = this.heroInfo.x;
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
                 x: this.heroInfo.x,
-                onUpdate: function() {
-                    // console.log('on-update');
-                }
+            //     onUpdate: function() {
+            //         // console.log('on-update');
+            //     }
             });            
         },
         'heroInfo.y': function() {
+            // this.position.y = this.heroInfo.y;
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
                 y: this.heroInfo.y,
-                onUpdate: function() {
-                    // console.log('on-update');
-                }
+            //     onUpdate: function() {
+            //         // console.log('on-update');
+            //     }
             });            
         },
 
@@ -183,13 +185,13 @@ export default {
             // var h = 90;// - (240 * (this.position.y / 600));
             return {
                 left: this.position.x + 'px',
-                bottom: (this.position.y * 0.0) + 'px',
+                // top: (this.position.y * 0.0) + 'px',
                 // width: w + 'px',
                 // height: h + 'px',    
                 // zIndex: 1000000000 - this.position.y,
                 // transform: '',
-                transform: 'translateZ(-' + (this.position.y / 1) + 'px)',
-
+                transform: 'translateZ(' + (-this.position.y) + 'px)',
+    
 // transform: 'perspective(500px) translateZ(-9.7rem)',
             };
         },
