@@ -13,7 +13,7 @@
 <style lang="sass" scoped>
 .todo-caption {
     margin: 2px 1px;
-    background-color: #38adffaa;
+    background-color: #38adffea;
     border: 1px solid #38adffea;
     border-radius: 3px;
     font-size: 9px;

@@ -22,13 +22,15 @@
     width: 50px;
     height: 70px;
     position: absolute;
+    left: 0px;
+    top: 0px;
     border: none;
     background-color: none;
     transform-style: preserve-3d;
 };
 .avatar-container {
     transform-style: preserve-3d;
-    transform: rotateY(30deg);
+    transform: translateY(18px) rotateY(30deg);
     position: relative;
     margin: 0px;
 }
@@ -40,7 +42,7 @@
     transform: rotateX(10deg); 
     padding: 2px 5px 1px 5px;
     border: 1px solid #4e4e4ee8;
-    background-color: #d0d0d070;
+    background-color: #ffffff8f;
 }
 .avatar-floor {
     transform-style: preserve-3d;
@@ -50,7 +52,7 @@
     width: 100%;
     height: 49px;    
     border: 1px solid #4e4e4ee8;
-    background-color: #f0f0f070;
+    background-color: #ffffff8f;
 }
 .avatar-shadow {
     transform-style: preserve-3d;
@@ -62,7 +64,7 @@
     width: 100%;
     height: 49px;    
     border: none;
-    background: linear-gradient(to top right, #24242430, #24242408);
+    background: linear-gradient(to top right, #24242480, #24242428);
 }
 
 
@@ -155,6 +157,7 @@ export default {
         },
         'heroInfo.x': function() {
             // this.position.x = this.heroInfo.x;
+
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
@@ -166,6 +169,7 @@ export default {
         },
         'heroInfo.y': function() {
             // this.position.y = this.heroInfo.y;
+
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
@@ -173,7 +177,7 @@ export default {
             //     onUpdate: function() {
             //         // console.log('on-update');
             //     }
-            });            
+            });
         },
 
     },
@@ -184,13 +188,13 @@ export default {
             // var w = 70;// - (120 * (this.position.y / 600));
             // var h = 90;// - (240 * (this.position.y / 600));
             return {
-                left: this.position.x + 'px',
+                left:  '0px',
                 // top: (this.position.y * 0.0) + 'px',
                 // width: w + 'px',
                 // height: h + 'px',    
                 // zIndex: 1000000000 - this.position.y,
                 // transform: '',
-                transform: 'translateZ(' + (-this.position.y) + 'px)',
+                transform: 'translate3d(' + (this.position.x) + 'px, 0px, ' + this.position.y + 'px)',
     
 // transform: 'perspective(500px) translateZ(-9.7rem)',
             };
