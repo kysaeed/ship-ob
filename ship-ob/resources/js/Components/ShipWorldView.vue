@@ -113,10 +113,10 @@ export default {
             this.heroes[0].x -= 50;
         },
         down: function() {
-            this.heroes[0].y -= 50;
+            this.heroes[0].y += 50;
         },
         up: function() {
-            this.heroes[0].y += 50;
+            this.heroes[0].y -= 50;
         },
         enter: function() {
             console.log('enter!')
@@ -166,7 +166,7 @@ export default {
         'h.x': function() {
             // console.log('x!');
             gsap.to(this.viewPoint, {
-                duration: 1,
+                duration: 1.2,
                 ease: 'power1.out',
                 x: (this.h.x + 0),
             });                        
@@ -174,7 +174,7 @@ export default {
         'h.y': function() {
             // console.log('y!');
             gsap.to(this.viewPoint, {
-                duration: 1,
+                duration: 1.2,
                 ease: 'power1.out',
                 y: -this.h.y + 100,
             });                        
