@@ -6,11 +6,8 @@
                     <div class="world-view" :style="viewStyle" >
                         <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
                         <anchor-view></anchor-view>
-                        <div class="world-ground" @click="onClick">
-                            <img src="/img/green.jpg" class="img-fluid" />
-                        </div>
+                        <ground-panel @pointed="onPointed"></ground-panel>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -60,6 +57,7 @@
 }
 
 .world-view {
+    over-flow: hidden;
     position: relative;
     height: 720px;
     width: 1000px;
@@ -69,17 +67,6 @@
 
 }
 
-.world-ground {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    background-color: #f0e0e0dd;
-    width: 1200px;
-    height: 1200px;  
-    transform-style: preserve-3d;
-    transform-origin: top;
-    transform: translateX(-600px) translateZ(-600px) translateY(154px) rotateX(90deg);
-}
 
 </style>
 
@@ -90,6 +77,7 @@ import gsap from 'gsap';
 import TodoEdit from './TodoEdit.vue';
 import HeroView from './HeroView.vue';
 import AnchorView from './AnchorView.vue';
+import GroundPanel from './GroundPanel.vue';
 
 
 export default {
@@ -100,16 +88,9 @@ export default {
         },
     },
     methods: {
-        onClick: function(e) {
-            if (!global.isFirefox) {
-                console.log(e, e.offsetX, e.offsetY);
-                this.heroes[0].x = (e.offsetX - 600);
-                this.heroes[0].y = (e.offsetY - 600);
-            } else {
-                console.log(e, e.layerX, e.layerY);
-                this.heroes[0].x = (e.layerX - 600);
-                this.heroes[0].y = (e.layerY - 600);
-            }
+        onPointed: function(e) {
+            this.heroes[0].x = (e.x - 0);
+            this.heroes[0].y = (e.y - 0);
         },
         right: function() {
             this.heroes[0].x += 50;
@@ -189,6 +170,7 @@ export default {
         'todo-edit': TodoEdit,
         'hero-view': HeroView,
         'anchor-view': AnchorView,
+        'ground-panel': GroundPanel,
     },
     computed: {
         viewStyle: function() {
