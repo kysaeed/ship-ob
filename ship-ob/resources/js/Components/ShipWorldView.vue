@@ -78,8 +78,7 @@
     height: 1200px;  
     transform-style: preserve-3d;
     transform-origin: top;
-    // transform: rotateX(90deg) translateX(0px) translateZ(0px) translateY(0px) rotateY(0deg);
-    transform: translateX(0px) translateZ(0px) translateY(154px) rotateX(90deg);
+    transform: translateX(-600px) translateZ(-600px) translateY(154px) rotateX(90deg);
 }
 
 </style>
@@ -102,9 +101,15 @@ export default {
     },
     methods: {
         onClick: function(e) {
-            console.log(e, e.offsetX, e.offsetY);
-            this.heroes[0].x = (e.offsetX);
-            this.heroes[0].y = (e.offsetY);
+            if (!global.isFirefox) {
+                console.log(e, e.offsetX, e.offsetY);
+                this.heroes[0].x = (e.offsetX - 600);
+                this.heroes[0].y = (e.offsetY - 600);
+            } else {
+                console.log(e, e.layerX, e.layerY);
+                this.heroes[0].x = (e.layerX - 600);
+                this.heroes[0].y = (e.layerY - 600);
+            }
         },
         right: function() {
             this.heroes[0].x += 50;

@@ -51,6 +51,49 @@ if (assset) {
 
 console.log(window.assetBaseUrl );
 
+const userAgent = window.navigator.userAgent.toLowerCase();
+const userAgentList = [
+    'msie',
+    'trident',
+    'edge',
+    'chrome',
+    'safari',
+    'firefox',
+    'opera',
+];
+
+var userAgentName = '';
+for (var i = 0; i < userAgentList.length; i++) {
+    if (userAgent.indexOf(userAgentList[i]) > -1) {
+        userAgentName = userAgentList[i];
+        break;
+    }
+}
+
+global.isFirefox = false;
+if (userAgentName === 'firefox') {
+    global.isFirefox = true;
+}
+
+
+if((userAgent.indexOf('msie') > -1) || (userAgent.indexOf('trident') > -1)) {
+    console.log('Internet Explorerをお使いですね');
+} else if(userAgent.indexOf('edge') != -1) {
+    console.log('Edgeをお使いですね');
+} else if(userAgent.indexOf('chrome') != -1) {
+    console.log('Google Chromeをお使いですね');
+} else if(userAgent.indexOf('safari') != -1) {
+    console.log('Safariをお使いですね');
+} else if(userAgent.indexOf('firefox') != -1) {
+    console.log('FireFoxをお使いですね');
+} else if(userAgent.indexOf('opera') != -1) {
+    console.log('Operaをお使いですね');
+} else {
+    console.log('そんなブラウザは知らん');
+}
+
+window.uaList = {};
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
