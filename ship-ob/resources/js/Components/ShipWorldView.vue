@@ -5,8 +5,11 @@
                 <div class="col-sm-12 world-view-container">
                     <div class="world-view" :style="viewStyle" >
                         <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
-                        <anchor-view></anchor-view>
-                        <ground-panel @pointed="onPointed"></ground-panel>
+                        <anchor-view :position="{x: 600, y: 1200}"></anchor-view>
+                        <ground-panel @pointed="onPointed" :offsetX="-600"></ground-panel>
+                        <ground-panel @pointed="onPointed" :offsetX="600"></ground-panel>
+                        <ground-panel @pointed="onPointed" :offsetX="-600" :offsetY="1200"></ground-panel>
+                        <ground-panel @pointed="onPointed" :offsetX="600" :offsetY="1200"></ground-panel>
                     </div>
                 </div>
             </div>
@@ -89,8 +92,8 @@ export default {
     },
     methods: {
         onPointed: function(e) {
-            this.heroes[0].x = (e.x - 0);
-            this.heroes[0].y = (e.y - 0);
+            this.heroes[0].x = (e.x);
+            this.heroes[0].y = (e.y);
         },
         right: function() {
             this.heroes[0].x += 50;
