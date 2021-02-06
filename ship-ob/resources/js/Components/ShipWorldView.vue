@@ -2,8 +2,8 @@
     <div>
         <div class="container-fluid">
             <div class="row ship-world">
-                <div class="col-sm-12 world-view-container">
-                    <div class="world-view" :style="viewStyle" >
+                <div class="col-sm-12 world-view-container" ref="view">
+                    <div class="world-view" :style="viewStyle">
                         <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
                         <anchor-view :position="{x: 600, y: 1200}"></anchor-view>
                         <ground-panel @pointed="onPointed" :offsetX="-600"></ground-panel>
@@ -52,10 +52,11 @@
 .world-view-container {
     position: relative;
     height: 720px;
+    width: 100%;
     overflow: hidden;
     transform-style: preserve-3d;
-    perspective: 3200px;
-    perspective-origin: 50% -900px;
+    perspective: 2700px;
+    perspective-origin: 50% -800px;
 
 }
 
@@ -116,8 +117,8 @@ export default {
             {
                 id: 1,
                 name: 'A様',
-                x: 0,
-                y: 0,
+                x: 200,
+                y: 900,
                 avatar: 'avatar1.png',
             },
             {
@@ -136,19 +137,22 @@ export default {
             },
         ];
 
+        var vp = {
+            x: dummyHeros[0].x,
+            y: dummyHeros[0].y,
+        };
+
         return {
             heroes: dummyHeros,
             h: dummyHeros[0],
-            viewPoint: {
-                x: 0,
-                y: 0,
-            },
+            viewPoint: vp,
         };
     },
     mounted: function() {
         console.log('ship-world-view: monted!!', this.worldInfo);
         // this.$refs['todoEdit'].show();
 
+        // this.onPointed();
 
     },
     watch: {
@@ -165,7 +169,7 @@ export default {
             gsap.to(this.viewPoint, {
                 duration: 1.2,
                 ease: 'power1.out',
-                y: -this.h.y + 100,
+                y: this.h.y,
             });                        
         },
     },
@@ -177,8 +181,12 @@ export default {
     },
     computed: {
         viewStyle: function() {
+            // var w = this.$refs.view.clientWidth;
+            // var h = this.$refs.view.clientHeight;
+            var w = 400;
+            var h = 500;
             return {
-                transform: 'translate3d(' +(-this.viewPoint.x + 400)+ 'px, 20px, ' +(this.viewPoint.y + 500)+ 'px)',
+                transform: 'translate3d(' + (-this.viewPoint.x + w)+ 'px, 20px, ' + (-this.viewPoint.y + h) + 'px)',
             };
         }
     },

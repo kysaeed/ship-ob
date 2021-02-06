@@ -1,8 +1,11 @@
 <template>
     <div class="anchor-container" :style="viewStyle">
-        <div class="anchor-base"></div>
-        <div class="anchor-m"></div>
-        <div class="anchor-m1 text-center">XX事業部</div>
+        <div class="anchor anchor-base"></div>
+        <div class="anchor anchor-m"></div>
+        <div class="anchor anchor-m1"></div>
+        <div class="anchor anchor-m2 text-center">
+            <br /><br />XX事業部
+        </div>
     </div>
 </template>
 
@@ -21,7 +24,7 @@
     transform-origin: 50% 50%;
 }
 
-.anchor-base {
+.anchor {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -29,39 +32,32 @@
     height: 180px;
     background-color: #f0f0f0a0;
     transform-style: preserve-3d;
-    transform: translateY(-15px);
     border-radius: 80px;
+    background-color: #f0f0f0a0;
     border: 1px solid #010101f0;
-    
+    padding: 30px 0px;
+}
+
+.anchor-base {
+    transform: translateY(-15px);
 }
 
 .anchor-m {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 180px;
-    height: 180px;
-    background-color: #f0f0f0a0;
-    transform-style: preserve-3d;
     transform: translateY(-40px);
-    border-radius: 80px;
-    border: 1px solid #010101f0;
-    
+    // width: 160px;
+    // height: 160px;
 }
 
 .anchor-m1 {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 180px;
-    height: 180px;
-    background-color: #f0f0f0a0;
-    transform-style: preserve-3d;
+    transform: translateY(-64px);
+    // width: 140px;
+    // height: 140px;
+}
+
+.anchor-m2 {
     transform: translateY(-90px);
-    border-radius: 80px;
-    border: 1px solid #010101f0;
-    color: black;
-    padding: 40px;
+    // width: 120px;
+    // height: 120px;
 }
 
 </style>

@@ -38,11 +38,11 @@ export default {
         onClick: function(e) {
             var p = {};
             if (!global.isFirefox) {
-                console.log(e, e.offsetX, e.offsetY);
+                // console.log(e, e.offsetX, e.offsetY);
                 p.x = (e.offsetX);
                 p.y = (e.offsetY);
             } else {
-                console.log(e, e.layerX, e.layerY);
+                // console.log(e, e.layerX, e.layerY);
                 p.x = (e.layerX);
                 p.y = (e.layerY);
             }
