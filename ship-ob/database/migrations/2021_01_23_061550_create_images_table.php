@@ -15,8 +15,12 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('file_name');
+            $table->text('file');
+            $table->string('disk')->index('images_disk_index');
             $table->string('hash')->index('images_hash_index');
+            $table->bigInteger('imageable_id')->index('images_imageable_id_index');
+            $table->string('imageable_type')->index('images_imageable_type_index');
+
             $table->timestamps();
         });
     }

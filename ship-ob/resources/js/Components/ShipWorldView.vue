@@ -87,8 +87,8 @@ import GroundPanel from './GroundPanel.vue';
 export default {
     props: {
         'worldInfo': {
-            type: Object,
-            default: {},
+            type: Array,
+            default: [],
         },
     },
     methods: {
@@ -113,29 +113,33 @@ export default {
         },
     },
     data: function() {
-        var dummyHeros = [
-            {
-                id: 1,
-                name: 'A様',
-                x: 200,
-                y: 900,
-                avatar: 'avatar1.png',
-            },
-            {
-                id: 2,
-                name: 'xxさん',
-                x: 260,
-                y: 410,
-                avatar: 'avatar2.png',
-            },
-            {
-                id: 3,
-                name: 'Cさん',
-                x: 190,
-                y: 920,
-                avatar: 'avatar2.png',
-            },
-        ];
+console.log(this.worldInfo)
+
+        // var dummyHeros = [
+        //     {
+        //         id: 1,
+        //         name: 'A様',
+        //         x: 200,
+        //         y: 900,
+        //         avatar: 'avatar1.png',
+        //     },
+        //     {
+        //         id: 2,
+        //         name: 'xxさん',
+        //         x: 260,
+        //         y: 410,
+        //         avatar: 'avatar2.png',
+        //     },
+        //     {
+        //         id: 3,
+        //         name: 'Cさん',
+        //         x: 190,
+        //         y: 920,
+        //         avatar: 'avatar2.png',
+        //     },
+        // ];
+
+        var dummyHeros = this.worldInfo;
 
         var vp = {
             x: dummyHeros[0].x,
@@ -150,9 +154,7 @@ export default {
     },
     mounted: function() {
         console.log('ship-world-view: monted!!', this.worldInfo);
-        // this.$refs['todoEdit'].show();
 
-        // this.onPointed();
 
     },
     watch: {

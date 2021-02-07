@@ -15,6 +15,12 @@ class User extends Authenticatable
         return $this->hasMany(Hero::class);
     }
 
+    public function avatarImage()
+    {
+        return $this->morphOne('App\Image', 'imageable');
+        // return $this->belongsTo(Image::class, 'avatar_image_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

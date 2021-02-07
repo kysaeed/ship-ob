@@ -200,7 +200,8 @@ export default {
             };
         },
         avatar: function() {
-            return global.asset('img/' + this.heroInfo.avatar);
+            return this.heroInfo.avatar;
+            // return global.asset('img/' + this.heroInfo.avatar);
         }
     },
     components: {

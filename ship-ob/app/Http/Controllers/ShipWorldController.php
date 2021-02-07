@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Storage;
+
+use App\Hero;
 
 class ShipWorldController extends Controller
 {
@@ -11,13 +14,30 @@ class ShipWorldController extends Controller
     {
         $user = Auth::user();
 
-// dd($user->heroes->toJson());
-        $h = '{}';
+        $h = [];
         if ($user) {
-            $h = $user->heroes->toJson();
+
+            // $h = $user->heroes->toJson();
         }
-        return view('wel2', [
-            'worldInfo' => $h,
+
+
+        $worldInfo = [];
+
+
+        $heroes = Hero::get();
+        foreach ($heroes as $i => $h) {
+            $avatar = 'avatar' . (1 + ($i % 2)) . '.png';
+            $worldInfo[] = [
+                'id' => $h->id,
+                'name' => $h->user->name, //"user-{$i}",
+                'x' => $h->x,
+                'y' => $h->y,
+                'avatar' => Storage::disk('public')->url($h->user->avatarImage->file), //asset("img/{$avatar}"),
+            ];
+        }
+
+        return view('world_view', [
+            'worldInfo' => $worldInfo,
         ]);
     }
 
