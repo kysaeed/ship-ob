@@ -8,7 +8,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Image::class, function (Faker $faker) {
 
-    $filename = $faker->image(\Storage::disk('public')->path('img/'), 128, 128, null, false, true);
+    \Storage::disk('public')->makeDirectory('img');
+    $filename = $faker->image(\Storage::disk('public')->path('img'), 128, 128, null, false, true);
     // $f = $faker->image('.', 128, 128, null, false);
     // $f2 = ;
     // dd($f);
