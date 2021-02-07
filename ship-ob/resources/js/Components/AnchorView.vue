@@ -4,8 +4,11 @@
         <div class="anchor anchor-m"></div>
         <div class="anchor anchor-m1"></div>
         <div class="anchor anchor-m2 text-center">
-            <br /><br />XX事業部
+            <div class="anchor-caption">
+                XX事業部
+            </div>
         </div>
+        <div class="anchor anchor-shadow"></div>
     </div>
 </template>
 
@@ -39,25 +42,43 @@
 }
 
 .anchor-base {
-    transform: translateY(-15px);
+    transform: translateZ(1px);
+}
+.anchor-shadow {
+    border: none;
+    transform: translateY(-55px) translateX(40px) translateZ(1px);
+    background-color: #20202050;
 }
 
 .anchor-m {
-    transform: translateY(-40px);
+    transform: translateZ(21px);
     // width: 160px;
     // height: 160px;
 }
 
 .anchor-m1 {
-    transform: translateY(-64px);
+    transform: translateZ(38px);
     // width: 140px;
     // height: 140px;
 }
 
 .anchor-m2 {
-    transform: translateY(-90px);
+    transform: translateZ(50px);
     // width: 120px;
     // height: 120px;
+}
+
+.anchor-caption {
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    width: 180px;
+    height: 30px;
+    padding: 10px;
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%;
+    transform: rotateX(-30deg) translateY(-25px) ;
+    background: none;
 }
 
 </style>
