@@ -31,11 +31,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6" style="background-color: gray;">
-                    <p>data 1 ...........</p>
-                    <p>data 2 ...........</p>
-                    <p>data 3 ...........</p>
-                    <p>data 4 ...........</p>
+                <div class="col-sm-6" style="background-color: gray; ">
+                    <h2>world: {{ world.name }}</h2>
+                    <p>{{ world.desc }}</p>
                 </div>
             </div>
         </div>
@@ -87,8 +85,8 @@ import GroundPanel from './GroundPanel.vue';
 export default {
     props: {
         'worldInfo': {
-            type: Array,
-            default: [],
+            type: Object,
+            default: null,
         },
     },
     methods: {
@@ -156,8 +154,8 @@ export default {
         //     },
         // ];
 
-        var dummyHeros = this.worldInfo;
-
+        var dummyHeros = this.worldInfo.heroes;
+console.log(this.worldInfo.world)
         var vp = {
             x: dummyHeros[0].x,
             y: dummyHeros[0].y,
@@ -168,6 +166,7 @@ export default {
             heroes: dummyHeros,
             h: dummyHeros[0],
             viewPoint: vp,
+            world: this.worldInfo.world,
         };
     },
     mounted: function() {

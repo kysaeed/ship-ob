@@ -8,12 +8,17 @@ class Hero extends Model
 {
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function world()
     {
-        return $this->belongsTo('App\World');
+        return $this->belongsTo(World::class);
+    }
+
+    public function scopeInWorld($query, App\World $world)
+    {
+        $query->where('world_id', $world->id);
     }
 
     protected $fillable = [

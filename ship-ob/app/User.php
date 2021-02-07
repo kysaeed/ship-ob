@@ -15,6 +15,12 @@ class User extends Authenticatable
         return $this->hasMany(Hero::class);
     }
 
+    public function worlds()
+    {
+        return $this->hasMany(World::class);
+    }
+
+
     public function avatarImage()
     {
         return $this->morphOne('App\Image', 'imageable');
