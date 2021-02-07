@@ -13,6 +13,10 @@
 
 Route::get('/', 'ShipWorldController@index');
 
+Route::prefix('world')->group(function() {
+    Route::post('move', 'ShipWorldController@ajaxMove')->name('world.move');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Storage;
 
+use App\User;
 use App\Hero;
 
 class ShipWorldController extends Controller
@@ -38,6 +39,18 @@ class ShipWorldController extends Controller
         return view('world_view', [
             'worldInfo' => $worldInfo,
         ]);
+    }
+
+    public function ajaxMove(Request $request)
+    {
+        $h = Hero::find($request->input('id')); // TEST
+
+        $h->x = $request->input('x');
+        $h->y = $request->input('y');
+        $h->save();
+
+
+        return $h;
     }
 
     public function getWorldData($world)

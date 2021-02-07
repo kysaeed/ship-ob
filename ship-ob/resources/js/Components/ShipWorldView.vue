@@ -95,7 +95,20 @@ export default {
         onPointed: function(e) {
             this.heroes[0].x = (e.x);
             this.heroes[0].y = (e.y);
+
+            var data = {
+                id: this.heroes[0].id,
+                x: this.heroes[0].x,
+                y: this.heroes[0].y,
+            };
+
+            this.axios.post('world/move', data).then(res => {
+                console.log(res)
+            }).catch(res => {
+                console.log(res);
+            });
         },
+
         right: function() {
             this.heroes[0].x += 50;
         },
@@ -113,7 +126,11 @@ export default {
         },
     },
     data: function() {
-console.log(this.worldInfo)
+
+        const axios = window.axios.create({
+            responseType: 'json',
+        });
+
 
         // var dummyHeros = [
         //     {
@@ -147,6 +164,7 @@ console.log(this.worldInfo)
         };
 
         return {
+            axios: axios,
             heroes: dummyHeros,
             h: dummyHeros[0],
             viewPoint: vp,

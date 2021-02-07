@@ -22,6 +22,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = 'http://localhost:8080/';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -74,8 +75,6 @@ global.isFirefox = false;
 if (userAgentName === 'firefox') {
     global.isFirefox = true;
 }
-
-window.uaList = {};
 
 
 /**
