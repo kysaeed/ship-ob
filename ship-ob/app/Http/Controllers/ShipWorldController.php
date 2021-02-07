@@ -26,13 +26,12 @@ class ShipWorldController extends Controller
 
         $heroes = Hero::get();
         foreach ($heroes as $i => $h) {
-            $avatar = 'avatar' . (1 + ($i % 2)) . '.png';
             $worldInfo[] = [
                 'id' => $h->id,
-                'name' => $h->user->name, //"user-{$i}",
+                'name' => $h->user->name,
                 'x' => $h->x,
                 'y' => $h->y,
-                'avatar' => Storage::disk('public')->url($h->user->avatarImage->file), //asset("img/{$avatar}"),
+                'avatar' => Storage::disk('public')->url($h->user->avatarImage->file),
             ];
         }
 
