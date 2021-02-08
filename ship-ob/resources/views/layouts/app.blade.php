@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="ajax-base-url" content="{{ url('ajax') }}">
+    <meta name="ajax-base-url" content="{{ url('/') }}">
     <meta name="asset-base-url" content="{{ asset('/') }}">
 
     <title>SHIP-OB!</title>

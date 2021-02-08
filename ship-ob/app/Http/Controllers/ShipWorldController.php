@@ -42,7 +42,7 @@ class ShipWorldController extends Controller
                 'name' => $h->user->name,
                 'x' => $h->x,
                 'y' => $h->y,
-                'avatar' => Storage::disk('public')->url($h->user->avatarImage->file),
+                'avatar' => asset(Storage::disk('public')->url($h->user->avatarImage->file)),
             ];
         }
 
