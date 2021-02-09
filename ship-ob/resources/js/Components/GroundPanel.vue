@@ -1,6 +1,6 @@
 <template>
     <div class="ground-panel" @click="onClick" :style="groundStyle">
-        <img src="/img/green.jpg" class="img-fluid" />
+        <img :src="image" class="img-fluid" />
     </div>
 </template>
 
@@ -57,6 +57,7 @@ export default {
             groundStyle: {
                 transform: 'translateX(' + this.offsetX + 'px) translateZ(' + this.offsetY + 'px) translateY(154px) rotateX(90deg)',
             },
+            image: global.asset('/img/green.jpg'),
         };
     },
 }
