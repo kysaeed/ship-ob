@@ -28,7 +28,11 @@ class ShipWorldController extends Controller
         $worldInfo = [];
 
         $world = World::find($idWorld);
-        $heroes = Hero::get();
+        if (is_null($world)) {
+            return '';
+        }
+        
+        $heroes = $world->heroes()->orderBy('id')->get();
         
 
         $worldInfo['world'] = [
@@ -36,13 +40,19 @@ class ShipWorldController extends Controller
             'desc' => $world->desc,
         ];
 
+
         foreach ($heroes as $i => $h) {
+            if (is_null($h->user->avatarImage)) {
+                $avatar = 'img/avatar1.png';
+            } else {
+                $avatar = Storage::disk('public')->url($h->user->avatarImage->file);
+            }
             $worldInfo['heroes'][] = [
                 'id' => $h->id,
                 'name' => $h->user->name,
                 'x' => $h->x,
                 'y' => $h->y,
-                'avatar' => asset(Storage::disk('public')->url($h->user->avatarImage->file)),
+                'avatar' => asset($avatar),
             ];
         }
 
@@ -58,8 +68,10 @@ class ShipWorldController extends Controller
             'x' => ['required', 'numeric'],
             'y' => ['required', 'numeric'],
         ]);
-        
-        $h = Hero::find($request->input('id')); // TEST
+
+
+        $h = Auth::user()->heroes()->first();
+        // $h = Hero::find($request->input('id')); // TEST
 
         $h->x = $request->input('x');
         $h->y = $request->input('y');

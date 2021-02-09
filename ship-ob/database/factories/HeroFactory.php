@@ -10,7 +10,7 @@ $factory->define(Hero::class, function (Faker $faker) {
     return [
         // 'name' => 'あああ',
         'world_id' => 1,
-        'x' => $faker->numberBetween(0, 2100),
-        'y' => $faker->numberBetween(0, 2100),
+        'x' => $faker->numberBetween(0, 1800),
+        'y' => $faker->numberBetween(0, 1800),
     ];
 });
