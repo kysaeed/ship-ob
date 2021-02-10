@@ -14,27 +14,18 @@ class ShipWorldController extends Controller
 {
     public function index(Request $request, $idWorld)
     {
-        $idWorld = 1;
-
         $user = Auth::user();
 
-        $h = [];
-        if ($user) {
-            
-            // $h = $user->heroes->toJson();
-        }
 
-
-        $worldInfo = [];
-
-        $world = World::find($idWorld);
-        if (is_null($world)) {
+        $isExists = $user->heroes()->where('world_id', $idWorld)->exists();
+        if (!$isExists) {
             return '';
         }
-        
-        $heroes = $world->heroes()->orderBy('id')->get();
-        
 
+        $world = World::find($idWorld);
+        $heroes = $world->heroes()->orderBy('id')->get();
+
+        $worldInfo = [];
         $worldInfo['world'] = [
             'name' => $world->name,
             'desc' => $world->desc,
