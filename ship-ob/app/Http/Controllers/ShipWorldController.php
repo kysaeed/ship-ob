@@ -12,7 +12,7 @@ use App\World;
 
 class ShipWorldController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $idWorld)
     {
         $idWorld = 1;
 
@@ -20,7 +20,7 @@ class ShipWorldController extends Controller
 
         $h = [];
         if ($user) {
-
+            
             // $h = $user->heroes->toJson();
         }
 

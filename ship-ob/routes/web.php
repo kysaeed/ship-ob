@@ -15,11 +15,11 @@ Route::get('/', function() {
     return view('top');
 });
 
-Route::prefix('home')->group(function() {
-    Route::get('/', 'ShipWorldController@index');
+Route::prefix('world')->group(function() {
+    Route::get('view/{idWorld}', 'ShipWorldController@index')->name('world.view');
     Route::post('move', 'ShipWorldController@ajaxMove')->name('world.move');
 });
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');

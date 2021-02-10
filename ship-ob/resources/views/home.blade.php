@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @foreach ($heroes as $h)
+                        <p>{{ $h->world->name }}</p>
+                        <p>{{ $h->world->desc }}</p>
+                        <a href="{{ route('world.view', ['idWorld' => $h->world->id]) }}">
+                            <button class="btn btn-primary">GO!</button>
+                        </a>
+                        <hr />
+                    @endforeach
                 </div>
             </div>
         </div>
