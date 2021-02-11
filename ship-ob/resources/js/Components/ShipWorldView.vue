@@ -207,15 +207,14 @@ console.log(this.worldInfo.world)
 
     },
     watch: {
-        'h.position.x': function() {
+        'h.position': function() {
             // console.log('x!');
             gsap.to(this.viewPoint, {
                 duration: 1.2,
                 ease: 'power1.out',
                 x: (this.h.position.x),
             });                        
-        },
-        'h.position.y': function() {
+
             // console.log('y!');
             gsap.to(this.viewPoint, {
                 duration: 1.2,
