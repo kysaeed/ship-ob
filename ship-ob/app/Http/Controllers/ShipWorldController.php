@@ -56,7 +56,7 @@ class ShipWorldController extends Controller
     {
         $user = Auth::user();
 
-        $isExists = $user->heroes()->where('world_id', $idWorld)->exists();
+        $isExists = $user->heroes()->inWorld($idWorld)->exists();
         if (!$isExists) {
             return [];
         }

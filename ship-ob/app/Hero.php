@@ -18,7 +18,7 @@ class Hero extends Model
 
     public function scopeInWorld($query, $idWorld)
     {
-        $query->where('world_id', $idWorld);
+        $query->where('heroes.world_id', $idWorld);
     }
 
     protected $fillable = [
