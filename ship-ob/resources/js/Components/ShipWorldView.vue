@@ -2,7 +2,7 @@
     <div>
         <div class="container-fluid">
             <div class="row ship-world">
-                <div class="col-sm-12 world-view-container" ref="view">
+                <div class="col-sm-12 world-view-container" ref="view" :style="wvcStyle">
                     <div class="world-view" :style="viewStyle">
                         <hero-view v-for="h in heroes" :key="h.id" :heroInfo="h"></hero-view>
                         <anchor-view :position="{x: 600, y: 1200}"></anchor-view>
@@ -30,6 +30,10 @@
                             <button class="btn btn-primary" @click="right()">▶</button>
                         </div>
                     </div>
+                <div>
+                    perspective: <input v-model="perspective" type="text" /> <br />
+                    perspective-origin: <input v-model="perspectiveOrigin" type="text" /> <br />
+                </div>
                 </div>
                 <div class="col-sm-6" style="background-color: gray; ">
                     <h2>world: {{ world.name }}</h2>
@@ -53,8 +57,8 @@
     width: 100%;
     overflow: hidden;
     transform-style: preserve-3d;
-    perspective: 2700px;
-    perspective-origin: 50% -800px;
+    // perspective: 2700px;
+    // perspective-origin: 50% -800px;
 
 }
 
@@ -65,7 +69,7 @@
     width: 1000px;
     // overflow: hidden;
     transform-style: preserve-3d;
-    // transform: translate3d(100px, 0, -200px);
+    transform: translate3d(0px, 0px, -500px);
 
 }
 
@@ -91,13 +95,13 @@ export default {
     },
     methods: {
         onPointed: function(e) {
-            this.heroes[0].x = (e.x);
-            this.heroes[0].y = (e.y);
+            this.h.x = (e.x);
+            this.h.y = (e.y);
 
             var data = {
-                id: this.heroes[0].id,
-                x: this.heroes[0].x,
-                y: this.heroes[0].y,
+                id: this.h.id,
+                x: this.h.x,
+                y: this.h.y,
             };
 
             this.axios.post('world/move/' + this.world.id, data).then(res => {
@@ -155,18 +159,22 @@ export default {
         // ];
 
         var dummyHeros = this.worldInfo.heroes;
+        var h = dummyHeros[this.worldInfo.index];
+
 console.log(this.worldInfo.world)
         var vp = {
-            x: dummyHeros[0].x,
-            y: dummyHeros[0].y,
+            x: h.x,
+            y: h.y,
         };
 
         return {
             axios: axios,
             heroes: dummyHeros,
-            h: dummyHeros[0],
+            h: h,
             viewPoint: vp,
             world: this.worldInfo.world,
+            perspective: 2700,
+            perspectiveOrigin: -700,
         };
     },
     mounted: function() {
@@ -206,8 +214,15 @@ console.log(this.worldInfo.world)
             var h = 500;
             return {
                 transform: 'translate3d(' + (-this.viewPoint.x + w)+ 'px, 20px, ' + (-this.viewPoint.y + h) + 'px)',
+
             };
-        }
+        },
+        wvcStyle: function() {
+            return {
+                perspective: this.perspective + 'px',
+                perspectiveOrigin: '50% ' + this.perspectiveOrigin + 'px',
+            };
+        },
     },
 }
 </script>

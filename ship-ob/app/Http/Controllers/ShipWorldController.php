@@ -33,11 +33,15 @@ class ShipWorldController extends Controller
         ];
 
 
+        $index = -1;
         foreach ($heroes as $i => $h) {
             if (is_null($h->user->avatarImage)) {
                 $avatar = 'img/avatar1.png';
             } else {
                 $avatar = Storage::disk('public')->url($h->user->avatarImage->file);
+            }
+            if ($h->user_id == $user->id) {
+                $index = $i;
             }
             $worldInfo['heroes'][] = [
                 'id' => $h->id,
@@ -47,7 +51,7 @@ class ShipWorldController extends Controller
                 'avatar' => asset($avatar),
             ];
         }
-
+        $worldInfo['index'] = $index;
         return view('world_view', [
             'worldInfo' => $worldInfo,
         ]);
