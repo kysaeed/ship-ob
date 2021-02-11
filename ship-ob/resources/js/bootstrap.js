@@ -55,8 +55,6 @@ if (assset) {
     } 
 }
 
-console.log(window.assetBaseUrl );
-
 const userAgent = window.navigator.userAgent.toLowerCase();
 const userAgentList = [
     'msie',
