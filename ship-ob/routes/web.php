@@ -13,12 +13,12 @@
 
 Route::get('/', function() {
     return view('top');
-});
+})->name('top');
 
-Route::prefix('world')->middleware(['auth'])->group(function() {
-    Route::get('view/{idWorld}', 'ShipWorldController@index')->name('world.view');
-    
-    Route::post('move', 'ShipWorldController@ajaxMove')->name('world.move');
+Route::prefix('world')->middleware(['auth'])->as('world.')->group(function() {
+    Route::get('view/{idWorld}', 'ShipWorldController@index')->name('view');
+
+    Route::post('move', 'ShipWorldController@ajaxMove')->name('move');
 });
 
 Auth::routes();
