@@ -132,18 +132,19 @@ export default {
         heroInfo: {
             default: {
                 name: 'xxxx',
-                x: 0,
-                y: 0,
+                position: {
+                    x: 0,
+                    y: 0,
+                },
             },
             type: Object,
         },
     },
     data: function() {
-
         return {
             position: {
-                x: this.heroInfo.x,
-                y: this.heroInfo.y,
+                x: this.heroInfo.position.x,
+                y: this.heroInfo.position.y,
             },
         };
     },
@@ -155,25 +156,25 @@ export default {
         heroInfo: function() {
             // console.log('wached!!', this.heroInfo);
         },
-        'heroInfo.x': function() {
+        'heroInfo.position.x': function() {
             // this.position.x = this.heroInfo.x;
 
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
-                x: this.heroInfo.x,
+                x: this.heroInfo.position.x,
             //     onUpdate: function() {
             //         // console.log('on-update');
             //     }
             });            
         },
-        'heroInfo.y': function() {
+        'heroInfo.position.y': function() {
             // this.position.y = this.heroInfo.y;
 
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
-                y: this.heroInfo.y,
+                y: this.heroInfo.position.y,
             //     onUpdate: function() {
             //         // console.log('on-update');
             //     }
@@ -184,11 +185,8 @@ export default {
 
     computed: {
         styleHero: function() {
-            
-            // var w = 70;// - (120 * (this.position.y / 600));
-            // var h = 90;// - (240 * (this.position.y / 600));
             return {
-                left:  '0px',
+                left: '0px',
                 // top: (this.position.y * 0.0) + 'px',
                 // width: w + 'px',
                 // height: h + 'px',    

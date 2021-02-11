@@ -96,13 +96,17 @@ export default {
     },
     methods: {
         onPointed: function(e) {
-            this.h.x = (e.x);
-            this.h.y = (e.y);
+            // this.h.x = (e.x);
+            // this.h.y = (e.y);
+            this.h.position = {
+                x: e.x,
+                y: e.y,
+            };
 
             var data = {
                 id: this.h.id,
-                x: this.h.x,
-                y: this.h.y,
+                x: this.h.position.x,
+                y: this.h.position.y,
             };
 
             this.axios.post('world/move/' + this.world.id, data).then(res => {
@@ -113,16 +117,16 @@ export default {
         },
 
         right: function() {
-            this.h.x += 50;
+            this.h.position.x += 50;
         },
         left: function() {
-            this.h.x -= 50;
+            this.h.position.x -= 50;
         },
         down: function() {
-            this.h.y += 50;
+            this.h.position.y += 50;
         },
         up: function() {
-            this.h.y -= 50;
+            this.h.position.y -= 50;
         },
         update: function() {
             var data = {};
@@ -144,7 +148,7 @@ export default {
         });
 
 
-        // var dummyHeros = [
+        // var heroList = [
         //     {
         //         id: 1,
         //         name: 'A様',
@@ -168,18 +172,18 @@ export default {
         //     },
         // ];
 
-        var dummyHeros = this.worldInfo.heroes;
-        var h = dummyHeros[this.worldInfo.index];
+        var heroList = this.worldInfo.heroes;
+        var h = heroList[this.worldInfo.index];
 
 console.log(this.worldInfo.world)
         var vp = {
-            x: h.x,
-            y: h.y,
+            x: h.position.x,
+            y: h.position.y,
         };
 
         return {
             axios: axios,
-            heroes: dummyHeros,
+            heroes: heroList,
             h: h,
             viewPoint: vp,
             world: this.worldInfo.world,
@@ -203,21 +207,21 @@ console.log(this.worldInfo.world)
 
     },
     watch: {
-        'h.x': function() {
+        'h.position.x': function() {
             // console.log('x!');
             gsap.to(this.viewPoint, {
                 duration: 1.2,
                 ease: 'power1.out',
-                x: (this.h.x + 0),
+                x: (this.h.position.x),
             });                        
         },
-        'h.y': function() {
+        'h.position.y': function() {
             // console.log('y!');
             gsap.to(this.viewPoint, {
                 duration: 1.2,
                 ease: 'power1.out',
-                y: this.h.y,
-            });                        
+                y: this.h.position.y,
+            });
         },
     },
     components: {

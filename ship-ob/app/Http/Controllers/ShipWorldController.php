@@ -93,8 +93,10 @@ class ShipWorldController extends Controller
             $worldInfo['heroes'][] = [
                 'id' => $h->id,
                 'name' => $h->user->name,
-                'x' => $h->x,
-                'y' => $h->y,
+                'position' => [
+                    'x' => $h->x,
+                    'y' => $h->y,
+                ],
                 'avatar' => asset($avatar),
             ];
         }
