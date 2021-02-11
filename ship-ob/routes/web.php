@@ -15,8 +15,9 @@ Route::get('/', function() {
     return view('top');
 });
 
-Route::prefix('world')->group(function() {
+Route::prefix('world')->middleware(['auth'])->group(function() {
     Route::get('view/{idWorld}', 'ShipWorldController@index')->name('world.view');
+    
     Route::post('move', 'ShipWorldController@ajaxMove')->name('world.move');
 });
 
