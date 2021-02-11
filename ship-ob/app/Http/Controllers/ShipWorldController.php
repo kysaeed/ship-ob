@@ -22,6 +22,53 @@ class ShipWorldController extends Controller
             return '';
         }
 
+        $worldInfo = $this->getWorldData($user, $idWorld);
+
+        return view('world_view', [
+            'worldInfo' => $worldInfo,
+        ]);
+    }
+
+    public function ajaxMove(Request $request, $idWorld)
+    {
+        $request->validate([
+            'id' => ['required', 'numeric'],
+            'x' => ['required', 'numeric'],
+            'y' => ['required', 'numeric'],
+        ]);
+
+
+        $h = Auth::user()->heroes()->inWorld($idWorld)->first();
+        if (is_null($h)) {
+            return [];
+        }
+
+        $h->x = $request->input('x');
+        $h->y = $request->input('y');
+        
+        $h->save();
+
+
+        return $h;
+    }
+
+    public function ajaxUpdate(Request $request, $idWorld)
+    {
+        $user = Auth::user();
+
+        $isExists = $user->heroes()->where('world_id', $idWorld)->exists();
+        if (!$isExists) {
+            return [];
+        }
+
+        $worldInfo = $this->getWorldData($user, $idWorld);
+
+        return $worldInfo;
+    }
+
+    public function getWorldData($user, $idWorld)
+    {
+
         $world = World::find($idWorld);
         $heroes = $world->heroes()->orderBy('id')->get();
 
@@ -52,36 +99,7 @@ class ShipWorldController extends Controller
             ];
         }
         $worldInfo['index'] = $index;
-        return view('world_view', [
-            'worldInfo' => $worldInfo,
-        ]);
-    }
 
-    public function ajaxMove(Request $request, $idWorld)
-    {
-        $request->validate([
-            'id' => ['required', 'numeric'],
-            'x' => ['required', 'numeric'],
-            'y' => ['required', 'numeric'],
-        ]);
-
-
-        $h = Auth::user()->heroes()->inWorld($idWorld)->first();
-        if (is_null($h)) {
-            return [];
-        }
-
-        $h->x = $request->input('x');
-        $h->y = $request->input('y');
-        
-        $h->save();
-
-
-        return $h;
-    }
-
-    public function getWorldData($world)
-    {
-
+        return $worldInfo;
     }
 }

@@ -36,6 +36,7 @@
                 </div>
                 </div>
                 <div class="col-sm-6" style="background-color: gray; ">
+                    <button class="btn btn-primary" @click="update()">Update</button>
                     <h2>world: {{ world.name }}</h2>
                     <p>{{ world.desc }}</p>
                 </div>
@@ -112,19 +113,28 @@ export default {
         },
 
         right: function() {
-            this.heroes[0].x += 50;
+            this.h.x += 50;
         },
         left: function() {
-            this.heroes[0].x -= 50;
+            this.h.x -= 50;
         },
         down: function() {
-            this.heroes[0].y += 50;
+            this.h.y += 50;
         },
         up: function() {
-            this.heroes[0].y -= 50;
+            this.h.y -= 50;
         },
-        enter: function() {
-            console.log('enter!')
+        update: function() {
+            var data = {};
+            this.axios.post('world/update/' + this.world.id, data).then(res => {
+                // console.log(res);
+                if (res.data.heroes) {
+                    this.heroes = res.data.heroes;
+                    this.h = this.heroes[res.data.index];
+                }
+            }).catch(res => {
+                console.log(res);
+            });
         },
     },
     data: function() {
@@ -180,6 +190,16 @@ console.log(this.worldInfo.world)
     mounted: function() {
         console.log('ship-world-view: monted!!', this.worldInfo);
 
+
+        var self = this;
+        var intervalUpdate = function() {
+            self.update();
+            self.$nextTick(() => {
+                setTimeout(intervalUpdate, 1000);
+            });
+        };
+
+        intervalUpdate();
 
     },
     watch: {

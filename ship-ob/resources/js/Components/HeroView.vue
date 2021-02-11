@@ -153,7 +153,7 @@ export default {
     },
     watch: {
         heroInfo: function() {
-            console.log('wached!!', this.heroInfo);
+            // console.log('wached!!', this.heroInfo);
         },
         'heroInfo.x': function() {
             // this.position.x = this.heroInfo.x;
