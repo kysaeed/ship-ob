@@ -15,12 +15,22 @@
                     @endif
 
                     @foreach ($heroes as $h)
-                        <p>{{ $h->world->name }}</p>
-                        <p>{{ $h->world->desc }}</p>
-                        <a href="{{ route('world.view', ['idWorld' => $h->world->id]) }}">
-                            <button class="btn btn-primary">GO!</button>
-                        </a>
-                        <hr />
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h4>{{ $h->world->name }}</h4>
+                            </li>
+                            <li class="list-group-item">{{ $h->world->desc }}</li>
+                            <li class="list-group-item">
+                                <p>
+                                    <i class="fa fa-user"></i> {{ $h->world->heroes()->count() }}
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('world.view', ['idWorld' => $h->world->id]) }}">
+                                    <button class="btn btn-primary">GO!</button>
+                                </a>
+                            </li>
+                        </ul>
                     @endforeach
                 </div>
             </div>
