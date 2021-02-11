@@ -16,9 +16,9 @@ class Hero extends Model
         return $this->belongsTo(World::class);
     }
 
-    public function scopeInWorld($query, App\World $world)
+    public function scopeInWorld($query, $idWorld)
     {
-        $query->where('world_id', $world->id);
+        $query->where('world_id', $idWorld);
     }
 
     protected $fillable = [

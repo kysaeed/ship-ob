@@ -100,7 +100,7 @@ export default {
                 y: this.heroes[0].y,
             };
 
-            this.axios.post('world/move', data).then(res => {
+            this.axios.post('world/move/' + this.world.id, data).then(res => {
                 console.log(res)
             }).catch(res => {
                 console.log(res);

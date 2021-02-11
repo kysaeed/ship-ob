@@ -27,6 +27,7 @@ class ShipWorldController extends Controller
 
         $worldInfo = [];
         $worldInfo['world'] = [
+            'id' => $world->id,
             'name' => $world->name,
             'desc' => $world->desc,
         ];
@@ -52,7 +53,7 @@ class ShipWorldController extends Controller
         ]);
     }
 
-    public function ajaxMove(Request $request)
+    public function ajaxMove(Request $request, $idWorld)
     {
         $request->validate([
             'id' => ['required', 'numeric'],
@@ -61,8 +62,10 @@ class ShipWorldController extends Controller
         ]);
 
 
-        $h = Auth::user()->heroes()->first();
-        // $h = Hero::find($request->input('id')); // TEST
+        $h = Auth::user()->heroes()->inWorld($idWorld)->first();
+        if (is_null($h)) {
+            return [];
+        }
 
         $h->x = $request->input('x');
         $h->y = $request->input('y');
