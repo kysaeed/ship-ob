@@ -156,31 +156,30 @@ export default {
         heroInfo: function() {
             // console.log('wached!!', this.heroInfo);
         },
-        'heroInfo.position.x': function() {
+
+        'heroInfo.position': function() {
             // this.position.x = this.heroInfo.x;
 
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
                 x: this.heroInfo.position.x,
-            //     onUpdate: function() {
-            //         // console.log('on-update');
-            //     }
+                // onUpdate: function() {
+                //     // console.log('on-update');
+                // }
             });            
-        },
-        'heroInfo.position.y': function() {
-            // this.position.y = this.heroInfo.y;
 
             gsap.to(this.position, {
                 duration: 1,
                 ease: 'power1.out',
                 y: this.heroInfo.position.y,
-            //     onUpdate: function() {
-            //         // console.log('on-update');
-            //     }
+                // onUpdate: function() {
+                //     // console.log('on-update');
+                // }
             });
-        },
 
+        },
+        
     },
 
     computed: {
@@ -194,7 +193,6 @@ export default {
                 // transform: '',
                 transform: 'translate3d(' + (this.position.x) + 'px, 0px, ' + this.position.y + 'px)',
     
-// transform: 'perspective(500px) translateZ(-9.7rem)',
             };
         },
         avatar: function() {
