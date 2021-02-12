@@ -109,11 +109,15 @@ export default {
                 y: this.h.position.y,
             };
 
+            this.isRequesting = true;
             this.axios.post('world/move/' + this.world.id, data).then(res => {
-                console.log(res)
+                console.log(res);
+                this.isRequesting = false;
             }).catch(res => {
+                this.isRequesting = false;
                 console.log(res);
             });
+
         },
 
         right: function() {
@@ -133,8 +137,18 @@ export default {
             this.axios.post('world/update/' + this.world.id, data).then(res => {
                 // console.log(res);
                 if (res.data.heroes) {
-                    this.heroes = res.data.heroes;
-                    this.h = this.heroes[res.data.index];
+                    var newHeroes = [];
+                    res.data.heroes.forEach((h) => {
+                        if (h.id === this.h.id) {
+                            if (!this.isRequesting) {
+                                this.h = h;
+                            }
+                            newHeroes.push(this.h);
+                        } else {
+                            newHeroes.push(h);
+                        }
+                    });
+                    this.heroes = newHeroes;
                 }
             }).catch(res => {
                 console.log(res);
@@ -182,6 +196,7 @@ console.log(this.worldInfo.world)
         };
 
         return {
+            isRequesting: false,
             axios: axios,
             heroes: heroList,
             h: h,

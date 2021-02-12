@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Storage;
+use DB;
 
 use App\User;
 use App\Hero;
@@ -22,11 +23,12 @@ class ShipWorldController extends Controller
             return '';
         }
 
-        $worldInfo = $this->getWorldData($user, $idWorld);
-
-        return view('world_view', [
-            'worldInfo' => $worldInfo,
-        ]);
+        return DB::transaction(function () use ($user, $idWorld) {
+            $worldInfo = $this->getWorldData($user, $idWorld);
+            return view('world_view', [
+                'worldInfo' => $worldInfo,
+            ]);
+        });
     }
 
     public function ajaxMove(Request $request, $idWorld)
@@ -37,8 +39,8 @@ class ShipWorldController extends Controller
             'y' => ['required', 'numeric'],
         ]);
 
-
-        $h = Auth::user()->heroes()->inWorld($idWorld)->first();
+        
+        $h = Auth::user()->heroes()->inWorld($idWorld)->lockForUpdate()->first();
         if (is_null($h)) {
             return [];
         }
@@ -70,7 +72,6 @@ class ShipWorldController extends Controller
     {
 
         $world = World::find($idWorld);
-        $heroes = $world->heroes()->orderBy('id')->get();
 
         $worldInfo = [];
         $worldInfo['world'] = [
@@ -81,6 +82,7 @@ class ShipWorldController extends Controller
 
 
         $index = -1;
+        $heroes = $world->heroes()->sharedLock()->orderBy('id')->get();
         foreach ($heroes as $i => $h) {
             if (is_null($h->user->avatarImage)) {
                 $avatar = 'img/avatar1.png';
