@@ -228,14 +228,8 @@ console.log(this.worldInfo.world)
                 duration: 1.2,
                 ease: 'power1.out',
                 x: (this.h.position.x),
-            });                        
-
-            // console.log('y!');
-            gsap.to(this.viewPoint, {
-                duration: 1.2,
-                ease: 'power1.out',
                 y: this.h.position.y,
-            });
+            });                        
         },
     },
     components: {

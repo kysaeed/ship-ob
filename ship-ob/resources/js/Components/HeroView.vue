@@ -164,19 +164,15 @@ export default {
                 duration: 1,
                 ease: 'power1.out',
                 x: this.heroInfo.position.x,
-                // onUpdate: function() {
-                //     // console.log('on-update');
-                // }
-            });            
-
-            gsap.to(this.position, {
-                duration: 1,
-                ease: 'power1.out',
                 y: this.heroInfo.position.y,
                 // onUpdate: function() {
                 //     // console.log('on-update');
                 // }
-            });
+                onComplete: function() {
+                    ;
+                }
+            });            
+
 
         },
         
@@ -198,7 +194,10 @@ export default {
         avatar: function() {
             return this.heroInfo.avatar;
             // return global.asset('img/' + this.heroInfo.avatar);
-        }
+        },
+        isUpdating() {
+            return false;
+        },
     },
     components: {
         'todo-list': TodoList,
