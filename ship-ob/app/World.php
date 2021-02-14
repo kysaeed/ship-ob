@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class World extends Model
 {
+    use SoftDeletes;
+
     public function heroes()
     {
         return $this->hasMany(Hero::class);

@@ -19,6 +19,7 @@ class CreateWorldsTable extends Migration
             $table->text('desc');
             $table->bigInteger('user_id')->index('worlds_user_id_index');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
