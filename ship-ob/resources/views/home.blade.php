@@ -19,8 +19,7 @@
                     @endif
 
                     <div id="app">
-                        <world-list :world-list='@json($worldList)'></world-list>
-                        <world-editor ></world-editor>
+                        <world-manager-view :world-list='@json($worldList)'></world-manager-view>
                     </div>
 
                 </div>
