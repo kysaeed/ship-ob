@@ -29,8 +29,21 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        $worldList = [];
+        foreach ($user->heroes as $h) {
+            $worldList[] = [
+                'id' => $h->world->id,
+                'name' => $h->world->name,
+                'desc' => $h->world->desc,
+                'heroCount' => $h->world->heroes()->count(),
+                'url' => route('world.view', ['idWorld' => $h->world->id]),
+            ];
+        }
+
         return view('home', [
             'heroes' => $user->heroes,
+            'worldList' => $worldList,
         ]);
     }
 
