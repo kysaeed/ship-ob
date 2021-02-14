@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 
 use App\World;
+use App\Hero;
 
 class HomeController extends Controller
 {
@@ -30,5 +32,42 @@ class HomeController extends Controller
         return view('home', [
             'heroes' => $user->heroes,
         ]);
+    }
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'desc' => 'required',
+        ]);
+
+        $user = Auth::user();
+        if (is_null($user)) {
+            return [];
+        }
+
+        if (is_null($request->input('id'))) {
+            DB::transaction(function() use ($request, $user) {
+                if ($user->worlds()->count() >= 10) {
+                    return;
+                }
+
+                $world = new World(
+                    $request->all(),
+                );
+
+                $user->worlds()->save($world);
+                $hero = new Hero([
+                    'x' => 123,
+                    'y' => 123,
+                ]);
+                $hero->world_id = $world->id;
+                $user->heroes()->save($hero);
+            });
+        }
+        
+        return [
+            'isSuccess' => true,
+        ];
     }
 }

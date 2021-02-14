@@ -11,6 +11,11 @@ class World extends Model
         return $this->hasMany(Hero::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected $fillable = [
         'name',
         'desc',

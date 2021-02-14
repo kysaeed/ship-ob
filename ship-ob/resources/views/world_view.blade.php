@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('scripts')
+<script src="{{ asset(mix('js/world.js')) }}" defer></script>
+@endpush
+
 @section('content')
 <div >
     <div id="app">

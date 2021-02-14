@@ -25,3 +25,5 @@ Route::prefix('world')->middleware(['auth'])->as('world.')->group(function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('home/world/create', 'HomeController@create')->name('home.world.create');
