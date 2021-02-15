@@ -4,7 +4,7 @@
         <b-container class="my-3" v-for="w in worldList" :key="w.id">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <h4>{{ w.name }}</h4>
+                    <h4><i class="fa fa-globe"></i> {{ w.name }}</h4>
                 </li>
                 <li class="list-group-item">{{ w.desc }}</li>
                 <li class="list-group-item">
@@ -15,6 +15,9 @@
                 <li class="list-group-item">
                     <a :href="w.url">
                         <button class="btn btn-primary">GO!</button>
+                    </a>
+                    <a href="#">
+                        <button class="btn btn-danger">DELETE</button>
                     </a>
                 </li>
             </ul>
